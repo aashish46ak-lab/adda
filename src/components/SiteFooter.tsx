@@ -1,24 +1,22 @@
 import { Link } from "react-router-dom";
-import logo from "@/assets/logo.png";
 import { Facebook, Instagram, Youtube, MessageCircle } from "lucide-react";
-import { useSiteSettings, getBranding, getCompany, getSocial } from "@/hooks/useSiteSettings";
+import { useSiteSettings, getBranding, getSocial } from "@/hooks/useSiteSettings";
 
 /** Footer — ADDA branding + social */
 const SiteFooter = () => {
   const { settings } = useSiteSettings();
   const branding = getBranding(settings);
-  const company = getCompany(settings);
   const social = getSocial(settings);
   const footerText = (settings.footer?.text as string) || "";
 
   const hasSocial = social.facebook || social.instagram || social.tiktok || social.youtube;
+  const logoSrc = branding.logo_url || "/adda-logo.svg";
 
   return (
     <footer className="border-t border-border bg-card/50 py-8">
       <div className="container mx-auto px-4 flex flex-col items-center gap-3 text-center">
-        <Link to="/" className="inline-flex items-center gap-2">
-          <img src={branding.logo_url || logo} alt="ADDA" className="h-10 w-auto" loading="lazy" />
-          <span className="font-display font-bold text-primary text-lg">ADDA</span>
+        <Link to="/" className="inline-flex items-center">
+          <img src={logoSrc} alt="ADDA" className="h-12 w-auto" loading="lazy" />
         </Link>
         <p className="font-body text-xs text-muted-foreground max-w-md">
           {footerText ||
@@ -53,6 +51,7 @@ const SiteFooter = () => {
         <div className="flex flex-wrap justify-center gap-3 text-xs text-muted-foreground">
           <Link to="/about" className="hover:text-primary">About</Link>
           <Link to="/sellers" className="hover:text-primary">Explore Sellers</Link>
+          <Link to="/become-seller" className="hover:text-primary">Become a Seller</Link>
           <Link to="/policy/privacy" className="hover:text-primary">Privacy</Link>
           <Link to="/policy/terms" className="hover:text-primary">Terms</Link>
           <Link to="/contact" className="hover:text-primary">Contact</Link>

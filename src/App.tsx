@@ -32,6 +32,7 @@ import ChatWidget from "./components/ChatWidget.tsx";
 import FloatingLangSwitch from "./components/FloatingLangSwitch.tsx";
 import AuthModal from "./components/AuthModal";
 import WelcomeManager from "./components/WelcomeManager";
+import BottomNav from "./components/BottomNav";
 import AdminLayout from "./components/admin/AdminLayout.tsx";
 import Dashboard from "./pages/admin/Dashboard.tsx";
 import AdminProducts from "./pages/admin/AdminProducts.tsx";
@@ -96,6 +97,7 @@ const App = () => (
 
                 <Route path="*" element={<NotFound />} />
               </Routes>
+              <BottomNav />
               <InstallPrompt />
               <ChatWidget />
             </CartProvider>

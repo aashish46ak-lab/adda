@@ -1,5 +1,5 @@
-import { Link, useLocation, useNavigate } from "react-router-dom";
-import { Home, Compass, Search, ShoppingCart, User } from "lucide-react";
+import { Link, useLocation } from "react-router-dom";
+import { Home, ShoppingBag, Package, ShoppingCart, User } from "lucide-react";
 import { useCart } from "@/hooks/useCart";
 import { useAuth } from "@/hooks/useAuth";
 import { useIsMobile } from "@/hooks/use-mobile";
@@ -7,7 +7,6 @@ import { useIsMobile } from "@/hooks/use-mobile";
 const BottomNav = () => {
   const isMobile = useIsMobile();
   const location = useLocation();
-  const navigate = useNavigate();
   const { count } = useCart();
   const { user, openAuthModal } = useAuth();
 
@@ -21,10 +20,10 @@ const BottomNav = () => {
 
   const items = [
     { to: "/", label: "Home", icon: Home, match: (p: string) => p === "/" },
-    { to: "/sellers", label: "Explore", icon: Compass, match: (p: string) => p.startsWith("/sellers") || p.startsWith("/shop") },
-    { to: "/products", label: "Search", icon: Search, match: () => false, isSearch: true },
+    { to: "/products", label: "Shop", icon: ShoppingBag, match: (p: string) => p.startsWith("/products") },
+    { to: user ? "/my-orders" : "#orders", label: "Orders", icon: Package, match: (p: string) => p === "/my-orders", needsAuth: true },
     { to: "/cart", label: "Cart", icon: ShoppingCart, match: (p: string) => p === "/cart", badge: count },
-    { to: user ? "/my-orders" : "#account", label: "Account", icon: User, match: (p: string) => p === "/my-orders" || p === "/wishlist", isAccount: true },
+    { to: user ? "/my-orders" : "#account", label: "Account", icon: User, match: (p: string) => p === "/wishlist", needsAuth: true },
   ];
 
   return (
@@ -38,27 +37,16 @@ const BottomNav = () => {
           const Icon = item.icon;
 
           const onClick = (e: React.MouseEvent) => {
-            if (item.isAccount && !user) {
+            if (item.needsAuth && !user) {
               e.preventDefault();
               openAuthModal();
-              return;
-            }
-            if (item.isSearch) {
-              e.preventDefault();
-              navigate("/products");
-              setTimeout(() => {
-                const el = document.querySelector<HTMLInputElement>(
-                  'input[type="search"], input[placeholder*="Search"], input[placeholder*="search"], input[placeholder*="ADDA"]',
-                );
-                el?.focus();
-              }, 300);
             }
           };
 
           return (
             <li key={item.label} className="flex">
               <Link
-                to={item.isAccount && !user ? "#" : item.to}
+                to={item.needsAuth && !user ? "#" : item.to}
                 onClick={onClick}
                 className={`flex flex-1 flex-col items-center justify-center gap-0.5 text-[10px] font-medium transition-colors ${
                   active ? "text-primary" : "text-muted-foreground"

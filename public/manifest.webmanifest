@@ -1,14 +1,14 @@
 {
-  "name": "eKharayo — Great Sagarmatha Trade Pvt. Ltd.",
-  "short_name": "eKharayo",
-  "description": "eKharayo — the official digital marketplace of Great Sagarmatha Trade Pvt. Ltd. Quality agricultural products from Nepal and trusted international suppliers.",
+  "name": "ADDA — Sabai Seller, Eutai Adda",
+  "short_name": "ADDA",
+  "description": "ADDA is Nepal's multi-vendor marketplace. Seller haru ko digital Adda. Discover products from independent sellers across Nepal.",
   "id": "/",
   "start_url": "/",
   "scope": "/",
   "display": "standalone",
   "orientation": "portrait",
   "background_color": "#ffffff",
-  "theme_color": "#0f2350",
+  "theme_color": "#0f766e",
   "icons": [
     { "src": "/icon-192.png", "sizes": "192x192", "type": "image/png", "purpose": "any" },
     { "src": "/icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any" },

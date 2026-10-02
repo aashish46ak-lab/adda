@@ -35,7 +35,7 @@ export function InstallButton({ className = "" }: { className?: string }) {
   return (
     <button
       type="button"
-      title="Install eKharayo app"
+      title="Install ADDA"
       onClick={async () => {
         if (!sharedDeferred) return;
         await sharedDeferred.prompt();

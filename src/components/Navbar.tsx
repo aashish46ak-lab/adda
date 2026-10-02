@@ -1,7 +1,6 @@
 import { useState, useEffect } from "react";
 import { Link, useLocation } from "react-router-dom";
-import logo from "@/assets/logo.png";
-import { Menu, X, Home, ShoppingBasket, Info, Image, UserCircle, PackageCheck, Phone, ShoppingCart, LayoutDashboard, LogIn, LogOut, ReceiptText, Heart, Store } from "lucide-react";
+import { Menu, X, Home, ShoppingBasket, Info, Phone, ShoppingCart, LayoutDashboard, LogIn, LogOut, ReceiptText, Heart, Store } from "lucide-react";
 import { useCart } from "@/hooks/useCart";
 import { useAuth } from "@/hooks/useAuth";
 import { useLang } from "@/i18n/LanguageContext";
@@ -46,13 +45,7 @@ const Navbar = () => {
         <div className="container mx-auto flex items-center justify-between gap-2 py-2.5 px-3 sm:px-4">
           <div className="flex items-center gap-1.5 sm:gap-2 shrink-0 min-w-0">
             <Link to="/" className="flex items-center gap-2 min-w-0">
-              <img src={logo} alt="ADDA" className="h-8 sm:h-9 w-auto shrink-0" />
-              <span className="font-display text-sm sm:text-base font-bold leading-tight text-primary min-w-0">
-                ADDA
-                <span className="font-body text-[8px] sm:text-[9px] font-medium block leading-tight tracking-wide text-muted-foreground truncate max-w-[140px] sm:max-w-[200px]">
-                  Sabai Seller, Eutai Adda
-                </span>
-              </span>
+              <img src="/adda-logo.svg" alt="ADDA" className="h-9 sm:h-10 w-auto shrink-0" />
             </Link>
             <InstallButton />
           </div>
@@ -105,7 +98,7 @@ const Navbar = () => {
             <Link to="/cart" aria-label={t("cart")} className="relative p-2 rounded-md text-foreground hover:bg-secondary">
               <ShoppingCart size={18} />
               {count > 0 && (
-                <span className="absolute -top-0.5 -right-0.5 bg-primary text-primary-foreground font-body text-[10px] font-bold rounded-full h-4 min-w-4 px-1 flex items-center justify-center">{count}</span>
+                <span className="absolute -top-0.5 -right-0.5 bg-accent text-accent-foreground font-body text-[10px] font-bold rounded-full h-4 min-w-4 px-1 flex items-center justify-center">{count}</span>
               )}
             </Link>
             <button type="button" onClick={() => setOpen(!open)} className="lg:hidden text-foreground p-1" aria-label="Menu">

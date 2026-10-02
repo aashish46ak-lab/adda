@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700;800&family=DM+Sans:wght@400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800&family=DM+Sans:wght@400;500;600;700&display=swap');
 
 @tailwind base;
 @tailwind components;
@@ -6,49 +6,49 @@
 
 @layer base {
   :root {
-    /* Premium olive + warm cream — light surfaces, dark text */
-    --background: 40 33% 97%;
-    --foreground: 150 18% 16%;
+    /* ADDA — navy + orange marketplace identity */
+    --background: 210 20% 98%;
+    --foreground: 220 40% 12%;
 
-    --card: 40 40% 99%;
-    --card-foreground: 150 18% 16%;
+    --card: 0 0% 100%;
+    --card-foreground: 220 40% 12%;
 
-    --popover: 40 40% 99%;
-    --popover-foreground: 150 18% 16%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 220 40% 12%;
 
-    --primary: 148 28% 32%;
-    --primary-foreground: 40 40% 98%;
+    --primary: 220 45% 18%;
+    --primary-foreground: 0 0% 100%;
 
-    --secondary: 140 18% 92%;
-    --secondary-foreground: 150 18% 18%;
+    --secondary: 210 25% 94%;
+    --secondary-foreground: 220 40% 18%;
 
-    --muted: 40 20% 93%;
-    --muted-foreground: 150 8% 38%;
+    --muted: 210 18% 95%;
+    --muted-foreground: 220 10% 42%;
 
-    --accent: 36 55% 48%;
-    --accent-foreground: 40 40% 98%;
+    --accent: 28 90% 52%;
+    --accent-foreground: 0 0% 100%;
 
-    --destructive: 0 70% 46%;
+    --destructive: 0 72% 51%;
     --destructive-foreground: 0 0% 100%;
 
-    --border: 140 14% 84%;
-    --input: 140 14% 88%;
-    --ring: 148 28% 32%;
+    --border: 214 18% 88%;
+    --input: 214 18% 90%;
+    --ring: 28 90% 52%;
 
-    --radius: 0.85rem;
+    --radius: 0.75rem;
 
-    --hero-overlay: 140 20% 94%;
-    --surface-warm: 40 28% 95%;
-    --green-glow: 148 30% 38%;
+    --hero-overlay: 210 25% 96%;
+    --surface-warm: 30 40% 97%;
+    --green-glow: 220 45% 22%;
 
-    --sidebar-background: 150 16% 18%;
-    --sidebar-foreground: 40 30% 96%;
-    --sidebar-primary: 148 32% 48%;
+    --sidebar-background: 220 40% 14%;
+    --sidebar-foreground: 210 20% 96%;
+    --sidebar-primary: 28 90% 52%;
     --sidebar-primary-foreground: 0 0% 100%;
-    --sidebar-accent: 150 12% 24%;
-    --sidebar-accent-foreground: 40 30% 96%;
-    --sidebar-border: 150 10% 26%;
-    --sidebar-ring: 148 32% 48%;
+    --sidebar-accent: 220 30% 20%;
+    --sidebar-accent-foreground: 210 20% 96%;
+    --sidebar-border: 220 25% 22%;
+    --sidebar-ring: 28 90% 52%;
   }
 }
 
@@ -63,8 +63,8 @@
 
   body {
     @apply bg-background text-foreground font-body antialiased;
-    background-color: hsl(40 33% 97%);
-    color: hsl(150 18% 16%);
+    background-color: hsl(210 20% 98%);
+    color: hsl(220 40% 12%);
     min-height: 100vh;
   }
 
@@ -75,7 +75,7 @@
 
 @layer utilities {
   .font-display {
-    font-family: "Playfair Display", serif;
+    font-family: "Outfit", system-ui, sans-serif;
   }
   .font-body {
     font-family: "DM Sans", system-ui, sans-serif;

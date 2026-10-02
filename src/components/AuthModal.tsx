@@ -18,7 +18,7 @@ const AuthModal = () => {
   const [confirm, setConfirm] = useState("");
   const [newPassword, setNewPassword] = useState("");
   const [code, setCode] = useState("");
-   const [show, setShow] = useState(false);
+  const [show, setShow] = useState(false);
   const [busy, setBusy] = useState(false);
   const cleanEmail = email.trim().toLowerCase();
 
@@ -149,7 +149,7 @@ const AuthModal = () => {
     signup: ["Create account", "Join ADDA to shop, track orders and follow sellers."],
     verify:
       otpType === "signup"
-        ? ["Verify "Verify your email", `Enter the 6-digit code sent to ${cleanEmail}.`]
+        ? ["Verify your email", `Enter the 6-digit code sent to ${cleanEmail}.`]
         : ["Reset code sent", `Enter the 6-digit code sent to ${cleanEmail}.`],
     forgot: ["Forgot password", "We will email you a reset code."],
     reset: ["New password", "Choose a strong password for your account."],

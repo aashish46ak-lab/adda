@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { Link, useLocation } from "react-router-dom";
 import logo from "@/assets/logo.png";
-import { Menu, X, Home, ShoppingBasket, Info, Image, UserCircle, PackageCheck, Phone, ShoppingCart, LayoutDashboard, LogIn, LogOut, ReceiptText, Heart } from "lucide-react";
+import { Menu, X, Home, ShoppingBasket, Info, Image, UserCircle, PackageCheck, Phone, ShoppingCart, LayoutDashboard, LogIn, LogOut, ReceiptText, Heart, Store } from "lucide-react";
 import { useCart } from "@/hooks/useCart";
 import { useAuth } from "@/hooks/useAuth";
 import { useLang } from "@/i18n/LanguageContext";
@@ -29,10 +29,8 @@ const Navbar = () => {
   const navLinks = [
     { label: t("home"), href: "/", icon: Home },
     { label: t("products"), href: "/products", icon: ShoppingBasket },
+    { label: t("exploreSellers") || "Sellers", href: "/sellers", icon: Store },
     { label: t("about"), href: "/about", icon: Info },
-    { label: t("gallery"), href: "/gallery", icon: Image },
-    { label: t("ownership"), href: "/ownership", icon: UserCircle },
-    { label: t("bulk"), href: "/bulk-order", icon: PackageCheck },
     { label: t("contact"), href: "/contact", icon: Phone },
   ];
 
@@ -48,18 +46,18 @@ const Navbar = () => {
         <div className="container mx-auto flex items-center justify-between gap-2 py-2.5 px-3 sm:px-4">
           <div className="flex items-center gap-1.5 sm:gap-2 shrink-0 min-w-0">
             <Link to="/" className="flex items-center gap-2 min-w-0">
-              <img src={logo} alt="eKharayo" className="h-8 sm:h-9 w-auto shrink-0" />
+              <img src={logo} alt="ADDA" className="h-8 sm:h-9 w-auto shrink-0" />
               <span className="font-display text-sm sm:text-base font-bold leading-tight text-primary min-w-0">
-                eKharayo
-                <span className="font-body text-[8px] sm:text-[9px] font-medium block leading-tight tracking-wide text-muted-foreground truncate max-w-[120px] sm:max-w-[180px]">
-                  Great Sagarmatha Trade Pvt. Ltd.
+                ADDA
+                <span className="font-body text-[8px] sm:text-[9px] font-medium block leading-tight tracking-wide text-muted-foreground truncate max-w-[140px] sm:max-w-[200px]">
+                  Sabai Seller, Eutai Adda
                 </span>
               </span>
             </Link>
             <InstallButton />
           </div>
 
-          <div className="hidden md:block flex-1 max-w-xs mx-2">
+          <div className="hidden md:block flex-1 max-w-md mx-2">
             <SmartSearchBar variant="navbar" />
           </div>
 

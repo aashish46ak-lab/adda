@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { ShoppingBasket, Phone, UserCircle, Image } from "lucide-react";
+import { ShoppingBasket, Store, UserPlus, Search } from "lucide-react";
 import SmartSearchBar from "./SmartSearchBar";
 import { useLang } from "@/i18n/LanguageContext";
 
@@ -8,14 +8,14 @@ const HeroSection = () => {
 
   const boxes = [
     { to: "/products", icon: ShoppingBasket, title: t("shop"), desc: t("buyProductsDesc") },
-    { to: "/gallery", icon: Image, title: t("gallery"), desc: t("galleryDesc") },
-    { to: "/ownership", icon: UserCircle, title: t("ownership"), desc: t("ownershipDesc") },
-    { to: "/contact", icon: Phone, title: t("contact"), desc: t("contactDesc") },
+    { to: "/sellers", icon: Store, title: t("exploreSellers") || "Explore Sellers", desc: t("galleryDesc") },
+    { to: "/become-seller", icon: UserPlus, title: t("becomeSeller") || "Become a Seller", desc: "Open your digital shop on ADDA" },
+    { to: "/products", icon: Search, title: t("search").split("…")[0] || "Search", desc: "Products, sellers & brands" },
   ];
 
   return (
     <section className="relative min-h-[88vh] flex items-center justify-center overflow-hidden bg-background">
-      <div className="absolute inset-0 bg-gradient-to-b from-[hsl(40,40%,97%)] via-[hsl(140,22%,95%)] to-[hsl(148,20%,93%)]" />
+      <div className="absolute inset-0 bg-gradient-to-b from-[hsl(170,30%,97%)] via-[hsl(168,25%,95%)] to-[hsl(166,22%,93%)]" />
       <div className="absolute top-[-10%] right-[-5%] w-[28rem] h-[28rem] rounded-full bg-primary/10 blur-[110px]" />
       <div className="absolute bottom-[-10%] left-[-5%] w-[22rem] h-[22rem] rounded-full bg-accent/10 blur-[100px]" />
 
@@ -58,17 +58,17 @@ const HeroSection = () => {
               <ShoppingBasket size={16} /> {t("shop")}
             </Link>
             <Link
-              to="/contact"
+              to="/become-seller"
               className="inline-flex items-center gap-2 border border-border bg-card text-foreground font-body text-sm font-semibold px-6 py-3 rounded-xl shadow-sm hover:border-primary/40 transition-colors"
             >
-              {t("contact")}
+              <UserPlus size={16} /> {t("becomeSeller") || "Become a Seller"}
             </Link>
           </div>
 
           <div className="grid grid-cols-2 gap-3 max-w-lg mx-auto opacity-0 animate-fade-in-up" style={{ animationDelay: "0.38s" }}>
             {boxes.map(({ to, icon: Icon, title, desc }) => (
               <Link
-                key={to}
+                key={to + title}
                 to={to}
                 className="rounded-2xl border border-border bg-card p-4 text-left shadow-sm hover:border-primary/35 hover:shadow-md transition-all"
               >

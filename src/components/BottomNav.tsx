@@ -1,5 +1,5 @@
 import { Link, useLocation, useNavigate } from "react-router-dom";
-import { Home, LayoutGrid, Search, ShoppingCart, User } from "lucide-react";
+import { Home, Compass, Search, ShoppingCart, User } from "lucide-react";
 import { useCart } from "@/hooks/useCart";
 import { useAuth } from "@/hooks/useAuth";
 import { useIsMobile } from "@/hooks/use-mobile";
@@ -11,7 +11,6 @@ const BottomNav = () => {
   const { count } = useCart();
   const { user, openAuthModal } = useAuth();
 
-  // Hide on admin / seller dashboard and auth pages
   const hide =
     location.pathname.startsWith("/admin") ||
     location.pathname.startsWith("/seller") ||
@@ -22,8 +21,8 @@ const BottomNav = () => {
 
   const items = [
     { to: "/", label: "Home", icon: Home, match: (p: string) => p === "/" },
-    { to: "/products", label: "Categories", icon: LayoutGrid, match: (p: string) => p.startsWith("/products") || p.startsWith("/sellers") },
-    { to: "/products?focus=search", label: "Search", icon: Search, match: () => false, isSearch: true },
+    { to: "/sellers", label: "Explore", icon: Compass, match: (p: string) => p.startsWith("/sellers") || p.startsWith("/shop") },
+    { to: "/products", label: "Search", icon: Search, match: () => false, isSearch: true },
     { to: "/cart", label: "Cart", icon: ShoppingCart, match: (p: string) => p === "/cart", badge: count },
     { to: user ? "/my-orders" : "#account", label: "Account", icon: User, match: (p: string) => p === "/my-orders" || p === "/wishlist", isAccount: true },
   ];
@@ -47,9 +46,10 @@ const BottomNav = () => {
             if (item.isSearch) {
               e.preventDefault();
               navigate("/products");
-              // Focus search after short delay
               setTimeout(() => {
-                const el = document.querySelector<HTMLInputElement>('input[type="search"], input[placeholder*="Search"], input[placeholder*="search"]');
+                const el = document.querySelector<HTMLInputElement>(
+                  'input[type="search"], input[placeholder*="Search"], input[placeholder*="search"], input[placeholder*="ADDA"]',
+                );
                 el?.focus();
               }, 300);
             }

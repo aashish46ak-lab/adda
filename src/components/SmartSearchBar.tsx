@@ -1,6 +1,6 @@
 import { useState, useRef, useEffect, useCallback } from "react";
 import { useNavigate } from "react-router-dom";
-import { Search, ShoppingBasket, FileText, FolderOpen, ArrowRight } from "lucide-react";
+import { Search, ShoppingBasket, FileText, FolderOpen, ArrowRight, Store } from "lucide-react";
 import { SearchItem, searchItems } from "@/lib/searchData";
 import { supabase } from "@/integrations/supabase/client";
 
@@ -8,12 +8,14 @@ const categoryIcons = {
   product: ShoppingBasket,
   page: FileText,
   category: FolderOpen,
+  seller: Store,
 };
 
 const categoryLabels = {
   product: "Product",
   page: "Page",
   category: "Category",
+  seller: "Seller",
 };
 
 interface SmartSearchBarProps {
@@ -43,7 +45,7 @@ const SmartSearchBar = ({ variant = "hero" }: SmartSearchBarProps) => {
       const fromProducts: SearchItem[] = ((pRes.data as { id: string; name: string; description: string | null }[]) ?? []).map(
         (p) => ({
           title: p.name,
-          description: p.description || "Available in our store",
+          description: p.description || "Available on ADDA",
           category: "product" as const,
           href: `/products/${p.id}`,
           keywords: [p.name.toLowerCase(), ...(p.description ? p.description.toLowerCase().split(/\s+/).slice(0, 6) : [])],
@@ -161,7 +163,7 @@ const SmartSearchBar = ({ variant = "hero" }: SmartSearchBarProps) => {
           onChange={(e) => setQuery(e.target.value)}
           onFocus={() => setFocused(true)}
           onKeyDown={handleKeyDown}
-          placeholder={isHero ? "Search products, pages… (English, नेपाली)" : "Search…"}
+          placeholder={isHero ? "Search products, sellers, brands…" : "Search ADDA…"}
           className={`w-full bg-transparent outline-none font-body ${
             isHero ? "text-foreground placeholder:text-muted-foreground text-sm" : "text-foreground placeholder:text-muted-foreground text-xs"
           }`}
@@ -189,7 +191,7 @@ const SmartSearchBar = ({ variant = "hero" }: SmartSearchBarProps) => {
           {results.length > 0 ? (
             <ul className="py-1.5 max-h-72 overflow-y-auto">
               {results.map((item, i) => {
-                const Icon = categoryIcons[item.category];
+                const Icon = categoryIcons[item.category] ?? ShoppingBasket;
                 return (
                   <li key={`${item.title}-${item.href}-${i}`}>
                     <button
@@ -206,7 +208,7 @@ const SmartSearchBar = ({ variant = "hero" }: SmartSearchBarProps) => {
                         <p className="font-body text-xs text-muted-foreground truncate">{item.description}</p>
                       </div>
                       <span className="font-body text-[10px] text-muted-foreground uppercase border border-border rounded px-1.5 py-0.5 shrink-0">
-                        {categoryLabels[item.category]}
+                        {categoryLabels[item.category] ?? item.category}
                       </span>
                       <ArrowRight size={12} className="text-muted-foreground shrink-0" />
                     </button>
@@ -220,7 +222,7 @@ const SmartSearchBar = ({ variant = "hero" }: SmartSearchBarProps) => {
                 No results for "<span className="text-foreground">{query}</span>"
               </p>
               {didYouMean && (
-                <button type="button" onClick={() => setDidYouMean} className="mt-2 font-body text-sm text-primary hover:underline">
+                <button type="button" onClick={() => setQuery(didYouMean)} className="mt-2 font-body text-sm text-primary hover:underline">
                   Did you mean: <span className="font-semibold">{didYouMean}</span>?
                 </button>
               )}
@@ -234,10 +236,10 @@ const SmartSearchBar = ({ variant = "hero" }: SmartSearchBarProps) => {
           className="absolute top-full left-0 right-0 mt-2 rounded-xl border border-border overflow-hidden z-50 shadow-2xl min-w-[280px]"
           style={{ background: "hsl(var(--card) / 0.98)", backdropFilter: "blur(20px)" }}
         >
-          <p className="px-4 pt-3 pb-1 font-body text-[10px] uppercase tracking-wider text-muted-foreground">Popular products</p>
+          <p className="px-4 pt-3 pb-1 font-body text-[10px] uppercase tracking-wider text-muted-foreground">Popular on ADDA</p>
           <ul className="py-1.5 max-h-72 overflow-y-auto">
             {suggestionList.map((item, i) => {
-              const Icon = categoryIcons[item.category];
+              const Icon = categoryIcons[item.category] ?? ShoppingBasket;
               return (
                 <li key={`sug-${item.title}-${i}`}>
                   <button type="button" onClick={() => goTo(item.href)} className="w-full flex items-center gap-3 px-4 py-2.5 text-left hover:bg-primary/5">

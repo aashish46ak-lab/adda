@@ -3,7 +3,7 @@ import logo from "@/assets/logo.png";
 import { Facebook, Instagram, Youtube, MessageCircle } from "lucide-react";
 import { useSiteSettings, getBranding, getCompany, getSocial } from "@/hooks/useSiteSettings";
 
-/** Footer without Products/About/Contact menu strip — branding + social only */
+/** Footer — ADDA branding + social */
 const SiteFooter = () => {
   const { settings } = useSiteSettings();
   const branding = getBranding(settings);
@@ -16,12 +16,13 @@ const SiteFooter = () => {
   return (
     <footer className="border-t border-border bg-card/50 py-8">
       <div className="container mx-auto px-4 flex flex-col items-center gap-3 text-center">
-        <Link to="/" className="inline-flex items-center">
-          <img src={branding.logo_url || logo} alt={`eKharayo — ${company.company_name}`} className="h-10 w-auto" loading="lazy" />
+        <Link to="/" className="inline-flex items-center gap-2">
+          <img src={branding.logo_url || logo} alt="ADDA" className="h-10 w-auto" loading="lazy" />
+          <span className="font-display font-bold text-primary text-lg">ADDA</span>
         </Link>
         <p className="font-body text-xs text-muted-foreground max-w-md">
           {footerText ||
-            "The official digital marketplace of Great Sagarmatha Trade Pvt. Ltd. — quality agricultural products from Nepal and trusted international suppliers."}
+            "Nepal's multi-vendor marketplace. Seller haru ko digital Adda. Many sellers, one place."}
         </p>
 
         {hasSocial ? (
@@ -49,10 +50,18 @@ const SiteFooter = () => {
           </div>
         ) : null}
 
+        <div className="flex flex-wrap justify-center gap-3 text-xs text-muted-foreground">
+          <Link to="/about" className="hover:text-primary">About</Link>
+          <Link to="/sellers" className="hover:text-primary">Explore Sellers</Link>
+          <Link to="/policy/privacy" className="hover:text-primary">Privacy</Link>
+          <Link to="/policy/terms" className="hover:text-primary">Terms</Link>
+          <Link to="/contact" className="hover:text-primary">Contact</Link>
+        </div>
+
         <p className="font-body text-xs text-muted-foreground">
-          © {new Date().getFullYear()} {company.company_name} (eKharayo). All Rights Reserved.
+          © {new Date().getFullYear()} ADDA. All Rights Reserved.
         </p>
-        <p className="font-body text-[11px] text-muted-foreground/70">Developed by Ashish</p>
+        <p className="font-body text-[11px] text-muted-foreground/70">Sabai Seller, Eutai Adda</p>
       </div>
     </footer>
   );

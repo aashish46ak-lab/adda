@@ -26,17 +26,17 @@ const Navbar = () => {
     : "bg-background/90 backdrop-blur-md border-b border-border/70";
 
   const navLinks = [
-    { label: t("home"), href: "/", icon: Home },
-    { label: t("products"), href: "/products", icon: ShoppingBasket },
-    { label: t("exploreSellers") || "Sellers", href: "/sellers", icon: Store },
-    { label: t("about"), href: "/about", icon: Info },
-    { label: t("contact"), href: "/contact", icon: Phone },
+    { label: t("home") || "Home", href: "/", icon: Home },
+    { label: t("products") || "Shop", href: "/products", icon: ShoppingBasket },
+    { label: "Sellers", href: "/sellers", icon: Store },
+    { label: t("about") || "About", href: "/about", icon: Info },
+    { label: t("contact") || "Contact", href: "/contact", icon: Phone },
   ];
 
   const accountLinks = [
-    { label: t("orders"), href: "/my-orders", icon: ReceiptText },
-    { label: t("wishlist"), href: "/wishlist", icon: Heart },
-    ...(isAdmin ? [{ label: t("admin"), href: "/admin", icon: LayoutDashboard }] : []),
+    { label: t("orders") || "Orders", href: "/my-orders", icon: ReceiptText },
+    { label: t("wishlist") || "Wishlist", href: "/wishlist", icon: Heart },
+    ...(isAdmin ? [{ label: t("admin") || "Admin", href: "/admin", icon: LayoutDashboard }] : []),
   ];
 
   return (
@@ -45,7 +45,15 @@ const Navbar = () => {
         <div className="container mx-auto flex items-center justify-between gap-2 py-2.5 px-3 sm:px-4">
           <div className="flex items-center gap-1.5 sm:gap-2 shrink-0 min-w-0">
             <Link to="/" className="flex items-center gap-2 min-w-0">
-              <img src="/adda-logo.svg" alt="ADDA" className="h-9 sm:h-10 w-auto shrink-0" />
+              <img src="/adda-logo.svg" alt="ADDA" className="h-8 sm:h-9 w-auto shrink-0" />
+              <span className="hidden xs:flex flex-col min-w-0 sm:flex">
+                <span className="font-display text-base sm:text-lg font-extrabold leading-none tracking-tight text-primary">
+                  ADDA
+                </span>
+                <span className="font-body text-[9px] sm:text-[10px] font-medium leading-tight text-muted-foreground truncate max-w-[120px] sm:max-w-[160px]">
+                  Sabai Seller, Eutai Adda
+                </span>
+              </span>
             </Link>
             <InstallButton />
           </div>
@@ -71,11 +79,11 @@ const Navbar = () => {
             <li>
               {user ? (
                 <button type="button" onClick={() => signOut()} className="flex items-center gap-1.5 font-body text-xs font-medium px-2 py-1.5 rounded-md text-foreground/80 hover:text-primary hover:bg-secondary/70">
-                  <LogOut size={14} /> {t("signOut")}
+                  <LogOut size={14} /> {t("signOut") || "Sign out"}
                 </button>
               ) : (
                 <button type="button" onClick={() => openAuthModal()} className="flex items-center gap-1.5 font-body text-xs font-medium px-2 py-1.5 rounded-md text-foreground/80 hover:text-primary hover:bg-secondary/70">
-                  <LogIn size={14} /> {t("signIn")}
+                  <LogIn size={14} /> {t("signIn") || "Sign in"}
                 </button>
               )}
             </li>
@@ -92,10 +100,10 @@ const Navbar = () => {
                 <LayoutDashboard size={18} />
               </Link>
             )}
-            <Link to="/wishlist" aria-label={t("wishlist")} className="p-2 rounded-md text-foreground hover:bg-secondary">
+            <Link to="/wishlist" aria-label={t("wishlist") || "Wishlist"} className="p-2 rounded-md text-foreground hover:bg-secondary">
               <Heart size={18} />
             </Link>
-            <Link to="/cart" aria-label={t("cart")} className="relative p-2 rounded-md text-foreground hover:bg-secondary">
+            <Link to="/cart" aria-label={t("cart") || "Cart"} className="relative p-2 rounded-md text-foreground hover:bg-secondary">
               <ShoppingCart size={18} />
               {count > 0 && (
                 <span className="absolute -top-0.5 -right-0.5 bg-accent text-accent-foreground font-body text-[10px] font-bold rounded-full h-4 min-w-4 px-1 flex items-center justify-center">{count}</span>
@@ -127,11 +135,11 @@ const Navbar = () => {
               <li>
                 {user ? (
                   <button type="button" onClick={() => { setOpen(false); signOut(); }} className="w-full flex items-center gap-2.5 font-body text-[12px] font-medium rounded-lg px-3 py-2.5 text-foreground/80 hover:bg-secondary/70">
-                    <LogOut size={15} className="text-primary shrink-0" /> {t("signOut")}
+                    <LogOut size={15} className="text-primary shrink-0" /> {t("signOut") || "Sign out"}
                   </button>
                 ) : (
                   <button type="button" onClick={() => { setOpen(false); openAuthModal(); }} className="w-full flex items-center gap-2.5 font-body text-[12px] font-medium rounded-lg px-3 py-2.5 text-foreground/80 hover:bg-secondary/70">
-                    <LogIn size={15} className="text-primary shrink-0" /> {t("signIn")}
+                    <LogIn size={15} className="text-primary shrink-0" /> {t("signIn") || "Sign in"}
                   </button>
                 )}
               </li>

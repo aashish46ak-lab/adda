@@ -23,6 +23,8 @@ import MyOrders from "./pages/MyOrders.tsx";
 import Wishlist from "./pages/Wishlist.tsx";
 import Policy from "./pages/Policy.tsx";
 import NotFound from "./pages/NotFound.tsx";
+import Sellers from "./pages/Sellers.tsx";
+import BecomeSeller from "./pages/BecomeSeller.tsx";
 import InstallPrompt from "./components/InstallPrompt.tsx";
 import ChatWidget from "./components/ChatWidget.tsx";
 import FloatingLangSwitch from "./components/FloatingLangSwitch.tsx";
@@ -59,6 +61,8 @@ const App = () => (
                 <Route path="/" element={<Index />} />
                 <Route path="/products" element={<Products />} />
                 <Route path="/products/:id" element={<ProductDetail />} />
+                <Route path="/sellers" element={<Sellers />} />
+                <Route path="/become-seller" element={<BecomeSeller />} />
                 <Route path="/about" element={<About />} />
                 <Route path="/gallery" element={<Gallery />} />
                 <Route path="/ownership" element={<Ownership />} />

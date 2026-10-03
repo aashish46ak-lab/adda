@@ -10,7 +10,7 @@ const SiteFooter = () => {
   const footerText = (settings.footer?.text as string) || "";
 
   const hasSocial = social.facebook || social.instagram || social.tiktok || social.youtube;
-  const logoSrc = branding.logo_url || "/adda-logo.svg";
+  const logoSrc = "/adda-logo.png";
 
   return (
     <footer className="border-t border-border bg-card/50 py-8">

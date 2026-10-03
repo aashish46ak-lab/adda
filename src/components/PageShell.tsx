@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import { ArrowLeft } from "lucide-react";
 
 interface PageShellProps {
-  title: string;
+  title?: string;
   subtitle?: string;
   children: ReactNode;
 }
@@ -11,7 +11,7 @@ interface PageShellProps {
 const PageShell = ({ title, subtitle, children }: PageShellProps) => {
   return (
     <>
-      <div className="relative bg-gradient-to-br from-background via-secondary/40 to-secondary py-20 md:py-28 overflow-hidden">
+      {title && <div className="relative bg-gradient-to-br from-background via-secondary/40 to-secondary py-20 md:py-28 overflow-hidden">
         <div className="absolute inset-0 overflow-hidden">
           <div className="absolute top-0 left-0 w-72 h-72 bg-primary/10 rounded-full blur-[100px] -translate-x-1/2 -translate-y-1/2" />
           <div className="absolute bottom-0 right-0 w-96 h-96 bg-accent/10 rounded-full blur-[120px] translate-x-1/3 translate-y-1/3" />
@@ -32,7 +32,7 @@ const PageShell = ({ title, subtitle, children }: PageShellProps) => {
             </p>
           )}
         </div>
-      </div>
+      </div>}
       <div className="bg-background text-foreground">{children}</div>
     </>
   );

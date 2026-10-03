@@ -14,7 +14,7 @@ const HomeExtras = () => {
     { icon: Sparkles, title: t("growing"), desc: t("growingDesc") },
   ];
 
-  const points = [t("detailPoint1"), t("detailPoint2"), t("detailPoint3"), t("detailPoint4")];
+  const points = [t("detailPoint1"), t("detailPoint2"), t("detailPoint3")];
 
   return (
     <div className="bg-background text-foreground">

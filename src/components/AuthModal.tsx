@@ -159,7 +159,7 @@ const AuthModal = () => {
     <Dialog open={isAuthModalOpen} onOpenChange={(open) => !open && closeAuthModal()}>
       <DialogContent className="sm:max-w-md bg-card border-border">
         <div className="flex flex-col items-center text-center mb-2">
-          <img src="/adda-logo.svg" alt="ADDA" className="h-12 w-auto mb-3" />
+          <img src="/adda-logo.png" alt="ADDA" className="h-12 w-auto mb-3" />
           <DialogTitle className="font-display text-xl font-bold">{titles[mode][0]}</DialogTitle>
           <DialogDescription className="font-body text-sm text-muted-foreground mt-1">{titles[mode][1]}</DialogDescription>
         </div>

@@ -4,7 +4,7 @@ import { supabase } from "@/integrations/supabase/client";
 import { useAuth } from "@/hooks/useAuth";
 import { toast } from "sonner";
 import { Mail, ShieldCheck, ArrowLeft, Loader2, Eye, EyeOff, Lock, User as UserIcon, Leaf, Truck, BadgeCheck } from "lucide-react";
-import logo from "@/assets/logo.png";
+import logo from "@/assets/adda-logo.png";
 
 const OTP_TTL = 600; // 10 minutes
 

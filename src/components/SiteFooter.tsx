@@ -1,16 +1,15 @@
 import { Link } from "react-router-dom";
 import { Facebook, Instagram, Youtube, MessageCircle } from "lucide-react";
-import { useSiteSettings, getBranding, getSocial } from "@/hooks/useSiteSettings";
+import { useSiteSettings, getSocial } from "@/hooks/useSiteSettings";
 
 /** Footer — ADDA branding + social */
 const SiteFooter = () => {
   const { settings } = useSiteSettings();
-  const branding = getBranding(settings);
   const social = getSocial(settings);
   const footerText = (settings.footer?.text as string) || "";
 
   const hasSocial = social.facebook || social.instagram || social.tiktok || social.youtube;
-  const logoSrc = branding.logo_url || "/adda-logo.svg";
+  const logoSrc = "/adda-logo.png";
 
   return (
     <footer className="border-t border-border bg-card/50 py-8">

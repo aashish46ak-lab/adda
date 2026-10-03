@@ -45,20 +45,12 @@ const Navbar = () => {
         <div className="container mx-auto flex items-center justify-between gap-2 py-2.5 px-3 sm:px-4">
           <div className="flex items-center gap-1.5 sm:gap-2 shrink-0 min-w-0">
             <Link to="/" className="flex items-center gap-2 min-w-0">
-              <img src="/adda-logo.svg" alt="ADDA" className="h-8 sm:h-9 w-auto shrink-0" />
-              <span className="hidden xs:flex flex-col min-w-0 sm:flex">
-                <span className="font-display text-base sm:text-lg font-extrabold leading-none tracking-tight text-primary">
-                  ADDA
-                </span>
-                <span className="font-body text-[9px] sm:text-[10px] font-medium leading-tight text-muted-foreground truncate max-w-[120px] sm:max-w-[160px]">
-                  Sabai Seller, Eutai Adda
-                </span>
-              </span>
+              <img src="/adda-logo.png" alt="ADDA" className="h-10 sm:h-12 w-auto shrink-0" />
             </Link>
             <InstallButton />
           </div>
 
-          <div className="hidden md:block flex-1 max-w-md mx-2">
+          <div className="hidden md:block flex-1 max-w-xl mx-2">
             <SmartSearchBar variant="navbar" />
           </div>
 

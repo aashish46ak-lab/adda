@@ -4,6 +4,7 @@ import { uploadMedia } from "@/lib/media";
 import { toast } from "sonner";
 import { Loader2, Save, Trash2 } from "lucide-react";
 import { ADMIN_COPY_KEYS, defaultDict, type DictKey, type Lang } from "@/i18n/defaults";
+import type { Json } from "@/integrations/supabase/types";
 
 type Settings = Record<string, Record<string, unknown>>;
 
@@ -50,7 +51,7 @@ const AdminWebsite = () => {
 
   const saveKey = async (key: string, value: Record<string, unknown>) => {
     setBusy(true);
-    const { error } = await supabase.from("site_settings").upsert({ key, value }, { onConflict: "key" });
+    const { error } = await supabase.from("site_settings").upsert({ key, value: value as Json }, { onConflict: "key" });
     setBusy(false);
     if (error) return toast.error(error.message);
     toast.success("Saved");

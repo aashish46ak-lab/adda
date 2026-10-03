@@ -1,5 +1,5 @@
 import { Link, useLocation } from "react-router-dom";
-import { Home, ShoppingBag, Package, ShoppingCart, User } from "lucide-react";
+import { Home, Search, Package, ShoppingCart, User } from "lucide-react";
 import { useCart } from "@/hooks/useCart";
 import { useAuth } from "@/hooks/useAuth";
 import { useIsMobile } from "@/hooks/use-mobile";
@@ -20,10 +20,10 @@ const BottomNav = () => {
 
   const items = [
     { to: "/", label: "Home", icon: Home, match: (p: string) => p === "/" },
-    { to: "/products", label: "Shop", icon: ShoppingBag, match: (p: string) => p.startsWith("/products") },
+    { to: "/products", label: "Search", icon: Search, match: (p: string) => p.startsWith("/products") },
     { to: user ? "/my-orders" : "#orders", label: "Orders", icon: Package, match: (p: string) => p === "/my-orders", needsAuth: true },
     { to: "/cart", label: "Cart", icon: ShoppingCart, match: (p: string) => p === "/cart", badge: count },
-    { to: user ? "/my-orders" : "#account", label: "Account", icon: User, match: (p: string) => p === "/wishlist", needsAuth: true },
+    { to: user ? "/my-orders" : "#account", label: "Profile", icon: User, match: (p: string) => p === "/wishlist", needsAuth: true },
   ];
 
   return (

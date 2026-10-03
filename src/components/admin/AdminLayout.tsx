@@ -101,7 +101,7 @@ const AdminLayout = () => {
             <Menu size={20} />
           </button>
           <Link to="/admin" className="flex items-center gap-2 shrink-0">
-            <img src="/adda-logo.svg" alt="ADDA" className="h-7 w-auto" />
+            <img src="/adda-logo.png" alt="ADDA" className="h-8 w-auto" />
             <span className="font-display font-bold text-sm text-foreground hidden sm:block">Admin</span>
           </Link>
           <div className="flex-1" />

@@ -1,11 +1,10 @@
 import { Link } from "react-router-dom";
 import { Facebook, Instagram, Youtube, MessageCircle } from "lucide-react";
-import { useSiteSettings, getBranding, getSocial } from "@/hooks/useSiteSettings";
+import { useSiteSettings, getSocial } from "@/hooks/useSiteSettings";
 
 /** Footer — ADDA branding + social */
 const SiteFooter = () => {
   const { settings } = useSiteSettings();
-  const branding = getBranding(settings);
   const social = getSocial(settings);
   const footerText = (settings.footer?.text as string) || "";
 

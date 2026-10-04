@@ -7,4 +7,4 @@ Disallow: /cart
 Disallow: /my-orders
 Disallow: /auth
 
-Sitemap: https://ekharayo.vercel.app/sitemap.xml
+Sitemap: https://ekharayo.lovable.app/sitemap.xml

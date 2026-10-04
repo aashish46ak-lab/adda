@@ -112,7 +112,7 @@ const Auth = () => {
       setMode("reset");
       toast.success("Code verified — choose a new password");
     } else {
-      toast.success("Email verified — welcome to eKharayo");
+      toast.success("Email verified — welcome to ADDA");
     }
   };
 
@@ -148,7 +148,7 @@ const Auth = () => {
 
   const titles: Record<Mode, [string, string]> = {
     login: ["Welcome back", "Sign in with your email and password."],
-    signup: ["Create your account", "Join eKharayo and shop fresh agro products."],
+    signup: ["Create your account", "Join ADDA and shop from sellers across Nepal."],
     forgot: ["Reset your password", "We'll email you a 6-digit reset code."],
     otp: ["Enter your code", `Code sent to ${cleanEmail}. It expires in 10 minutes.`],
     reset: ["Choose a new password", "Your new password must be at least 6 characters."],
@@ -161,13 +161,13 @@ const Auth = () => {
       <div className="hidden lg:flex lg:w-1/2 relative overflow-hidden bg-gradient-to-br from-primary/20 via-background to-secondary items-center justify-center p-12">
         <div className="absolute inset-0 opacity-20 bg-[linear-gradient(hsl(var(--primary)/0.3)_1px,transparent_1px),linear-gradient(90deg,hsl(var(--primary)/0.3)_1px,transparent_1px)] bg-[size:48px_48px]" />
         <div className="relative max-w-md space-y-8">
-          <img src={logo} alt="eKharayo" className="h-16 w-auto" />
+          <img src={logo} alt="ADDA" className="h-16 w-auto" />
           <div>
             <h2 className="font-display text-4xl font-bold text-foreground leading-tight">
               Fresh from the farm, <span className="text-primary">straight to your door.</span>
             </h2>
             <p className="font-body text-muted-foreground mt-3">
-              The official digital marketplace of Great Sagarmatha Trade Pvt. Ltd. — quality agro products from Nepal
+              Sabai Seller, Eutai Adda — shop from sellers across Nepal
               and trusted international suppliers.
             </p>
           </div>
@@ -195,7 +195,7 @@ const Auth = () => {
             <ArrowLeft size={16} /> Back to Home
           </Link>
           <div className="bg-card border border-border rounded-2xl shadow-xl shadow-primary/5 p-8">
-            <img src={logo} alt="eKharayo" className="h-12 w-auto mx-auto mb-6 lg:hidden" />
+            <img src={logo} alt="ADDA" className="h-12 w-auto mx-auto mb-6 lg:hidden" />
             <h1 className="font-display text-2xl font-bold text-foreground text-center mb-1">{title}</h1>
             <p className="font-body text-sm text-muted-foreground text-center mb-7">{subtitle}</p>
 

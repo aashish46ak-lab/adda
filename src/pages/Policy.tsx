@@ -57,7 +57,7 @@ const Policy = () => {
   return (
     <div className="min-h-screen pt-14">
       <Navbar />
-      <PageShell title={meta.title} subtitle="Great Sagarmatha Trade Pvt. Ltd. (eKharayo)">
+      <PageShell title={meta.title} subtitle="ADDA Marketplace">
         <div className="container mx-auto px-4 py-16 max-w-3xl">
           {loading ? (
             <div className="flex justify-center py-16">

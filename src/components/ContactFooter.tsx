@@ -98,7 +98,7 @@ const ContactFooter = () => {
         ) : null}
 
         <div className="border-t border-border pt-6 text-center">
-          <p className="font-body text-sm text-muted-foreground">© 2026 {company.company_name} (eKharayo). All rights reserved.</p>
+          <p className="font-body text-sm text-muted-foreground">© 2026 {company.company_name}. All rights reserved.</p>
         </div>
       </div>
     </div>

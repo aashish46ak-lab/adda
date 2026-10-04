@@ -59,7 +59,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
   const fetchRoles = async (userId: string): Promise<AppRole[]> => {
     const { data: roleRows, error } = await supabase.from("user_roles").select("role").eq("user_id", userId);
     if (error) {
-      console.error("[eKharayo] user_roles load failed", error.message);
+      console.error("[ADDA] user_roles load failed", error.message);
       return [];
     }
     const list = ((roleRows ?? []) as { role: AppRole }[]).map((r) => r.role);

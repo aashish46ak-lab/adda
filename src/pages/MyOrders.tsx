@@ -40,7 +40,7 @@ const MyOrders = () => {
   return (
     <div className="min-h-screen pt-14">
       <Navbar />
-      <PageShell title="My Orders" subtitle="Track everything you've ordered from eKharayo">
+      <PageShell title="My Orders" subtitle="Track everything you've ordered from ADDA">
         <div className="container mx-auto px-4 py-16 max-w-3xl">
           {loading ? (
             <div className="flex justify-center py-16"><Loader2 className="animate-spin text-primary" size={28} /></div>

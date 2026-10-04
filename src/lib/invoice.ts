@@ -87,7 +87,7 @@ export async function generateInvoicePdf(order: InvoiceOrder, items: InvoiceItem
   const margin = 15;
   let y = 18;
 
-  const companyName = company.name || "eKharayo — Great Sagarmatha Trade Pvt. Ltd.";
+  const companyName = company.name || "ADDA Marketplace";
   const logoDataUrl = await loadLogoDataUrl(company.logo_url);
 
   if (logoDataUrl) {
@@ -239,7 +239,7 @@ export async function generateInvoicePdf(order: InvoiceOrder, items: InvoiceItem
   doc.setFont("helvetica", "bold");
   doc.setFontSize(9.5);
   doc.setTextColor(...EMERALD);
-  doc.text("Thank you for shopping with eKharayo", pageWidth / 2, footerY - 2, { align: "center" });
+  doc.text("Thank you for shopping with ADDA", pageWidth / 2, footerY - 2, { align: "center" });
   doc.setFont("helvetica", "normal");
   doc.setFontSize(8);
   doc.setTextColor(...GRAY);
@@ -270,7 +270,7 @@ export async function generateInvoiceImage(order: InvoiceOrder, items: InvoiceIt
   const left = logo ? 212 : 72;
   ctx.fillStyle = "#141414";
   ctx.font = "bold 34px Arial";
-  ctx.fillText(company.name || "eKharayo — Great Sagarmatha Trade Pvt. Ltd.", left, 104);
+  ctx.fillText(company.name || "ADDA Marketplace", left, 104);
   ctx.fillStyle = "#666666";
   ctx.font = "20px Arial";
   [company.address, [company.phone1, company.phone2].filter(Boolean).join(" / "), company.email].filter(Boolean).forEach((line, index) => ctx.fillText(String(line), left, 140 + index * 27));
@@ -307,7 +307,7 @@ export async function generateInvoiceImage(order: InvoiceOrder, items: InvoiceIt
   ctx.fillText(`Payment method: ${paymentMethodLabel(order.payment_method)}`, 72, y);
   ctx.fillText(`Payment status: ${(order.payment_status || "pending").toUpperCase()}`, 72, y + 34);
   ctx.fillText(`Order status: ${order.status.replace(/_/g, " ").toUpperCase()}`, 72, y + 68);
-  ctx.textAlign = "center"; ctx.fillStyle = "#10b981"; ctx.font = "bold 22px Arial"; ctx.fillText("Thank you for shopping with eKharayo", width / 2, height - 92);
+  ctx.textAlign = "center"; ctx.fillStyle = "#10b981"; ctx.font = "bold 22px Arial"; ctx.fillText("Thank you for shopping with ADDA", width / 2, height - 92);
   const link = document.createElement("a");
   link.download = `invoice-${order.order_number}.png`;
   link.href = canvas.toDataURL("image/png", 1);

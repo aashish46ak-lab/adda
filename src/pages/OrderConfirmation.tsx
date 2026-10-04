@@ -88,7 +88,7 @@ const OrderConfirmation = () => {
   return (
     <div className="min-h-screen pt-14">
       <Navbar />
-      <PageShell title="Order Confirmed" subtitle="Thank you for shopping with eKharayo">
+      <PageShell title="Order Confirmed" subtitle="Thank you for shopping with ADDA">
         <div className="container mx-auto px-4 py-16 max-w-3xl">
           {loading ? (
             <div className="flex justify-center py-16"><Loader2 className="animate-spin text-primary" size={28} /></div>

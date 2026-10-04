@@ -64,7 +64,7 @@ export const getContact = (settings: SiteSettings) => {
 export const getCompany = (settings: SiteSettings) => {
   const c = settings.company ?? {};
   return {
-    company_name: str(c.company_name, "Great Sagarmatha Trade Pvt. Ltd."),
+    company_name: str(c.company_name, "ADDA Marketplace"),
     tagline: str(c.tagline, ""),
     about: str(c.about, ""),
     business_hours: str(c.business_hours, ""),

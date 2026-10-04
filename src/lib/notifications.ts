@@ -11,14 +11,14 @@ export type OrderEvent =
   | "order_cancelled";
 
 const SUBJECTS: Record<OrderEvent, string> = {
-  order_placed: "Order received — eKharayo",
-  order_confirmed: "Order confirmed — eKharayo",
+  order_placed: "Order received — ADDA",
+  order_confirmed: "Order confirmed — ADDA",
   order_processing: "Your order is being prepared",
-  order_packed: "Order packed — eKharayo",
-  order_shipped: "Order shipped — eKharayo",
-  out_for_delivery: "Out for delivery — eKharayo",
-  order_delivered: "Delivered — thank you for ordering eKharayo",
-  order_cancelled: "Order cancelled — eKharayo",
+  order_packed: "Order packed — ADDA",
+  order_shipped: "Order shipped — ADDA",
+  out_for_delivery: "Out for delivery — ADDA",
+  order_delivered: "Delivered — thank you for ordering ADDA",
+  order_cancelled: "Order cancelled — ADDA",
 };
 
 function bodyFor(event: OrderEvent, orderNumber: string, total?: number) {
@@ -30,7 +30,7 @@ function bodyFor(event: OrderEvent, orderNumber: string, total?: number) {
     order_packed: `Order ${orderNumber} has been packed and is ready for dispatch.`,
     order_shipped: `Order ${orderNumber} is on the way. Track status anytime in My Orders.`,
     out_for_delivery: `Order ${orderNumber} is out for delivery. Please keep your phone reachable.`,
-    order_delivered: `Order ${orderNumber} was delivered. Thank you for shopping with eKharayo — Great Sagarmatha Trade Pvt. Ltd.`,
+    order_delivered: `Order ${orderNumber} was delivered. Thank you for shopping with ADDA Marketplace`,
     order_cancelled: `Order ${orderNumber} was cancelled. Contact us if you need help.`,
   };
   return map[event];

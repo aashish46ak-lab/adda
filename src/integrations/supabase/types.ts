@@ -360,6 +360,7 @@ export type Database = {
           sale_price: number | null
           seo_description: string | null
           seo_title: string | null
+          shop_id: string | null
           sku: string | null
           slug: string
           stock: number
@@ -387,6 +388,7 @@ export type Database = {
           sale_price?: number | null
           seo_description?: string | null
           seo_title?: string | null
+          shop_id?: string | null
           sku?: string | null
           slug: string
           stock?: number
@@ -414,6 +416,7 @@ export type Database = {
           sale_price?: number | null
           seo_description?: string | null
           seo_title?: string | null
+          shop_id?: string | null
           sku?: string | null
           slug?: string
           stock?: number
@@ -429,6 +432,13 @@ export type Database = {
             columns: ["category_id"]
             isOneToOne: false
             referencedRelation: "categories"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "products_shop_id_fkey"
+            columns: ["shop_id"]
+            isOneToOne: false
+            referencedRelation: "shops"
             referencedColumns: ["id"]
           },
         ]
@@ -506,6 +516,45 @@ export type Database = {
             referencedColumns: ["id"]
           },
         ]
+      }
+      shops: {
+        Row: {
+          city: string | null
+          commission_rate: number
+          created_at: string
+          description: string | null
+          id: string
+          name: string
+          owner_id: string | null
+          rating: number
+          slug: string
+          status: string
+        }
+        Insert: {
+          city?: string | null
+          commission_rate?: number
+          created_at?: string
+          description?: string | null
+          id?: string
+          name: string
+          owner_id?: string | null
+          rating?: number
+          slug: string
+          status?: string
+        }
+        Update: {
+          city?: string | null
+          commission_rate?: number
+          created_at?: string
+          description?: string | null
+          id?: string
+          name?: string
+          owner_id?: string | null
+          rating?: number
+          slug?: string
+          status?: string
+        }
+        Relationships: []
       }
       site_settings: {
         Row: {

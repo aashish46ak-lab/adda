@@ -196,36 +196,51 @@ export type Database = {
       }
       order_items: {
         Row: {
+          commission: number
           created_at: string
+          fulfillment_status: string
           id: string
           image_url: string | null
           line_total: number
           order_id: string
+          payout_status: string
           product_id: string | null
           product_name: string
           quantity: number
+          seller_payout: number
+          shop_id: string | null
           unit_price: number
         }
         Insert: {
+          commission?: number
           created_at?: string
+          fulfillment_status?: string
           id?: string
           image_url?: string | null
           line_total?: number
           order_id: string
+          payout_status?: string
           product_id?: string | null
           product_name: string
           quantity?: number
+          seller_payout?: number
+          shop_id?: string | null
           unit_price?: number
         }
         Update: {
+          commission?: number
           created_at?: string
+          fulfillment_status?: string
           id?: string
           image_url?: string | null
           line_total?: number
           order_id?: string
+          payout_status?: string
           product_id?: string | null
           product_name?: string
           quantity?: number
+          seller_payout?: number
+          shop_id?: string | null
           unit_price?: number
         }
         Relationships: [
@@ -241,6 +256,13 @@ export type Database = {
             columns: ["product_id"]
             isOneToOne: false
             referencedRelation: "products"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "order_items_shop_id_fkey"
+            columns: ["shop_id"]
+            isOneToOne: false
+            referencedRelation: "shops"
             referencedColumns: ["id"]
           },
         ]
@@ -677,6 +699,7 @@ export type Database = {
       is_admin: { Args: never; Returns: boolean }
       is_banned: { Args: never; Returns: boolean }
       is_super_admin: { Args: never; Returns: boolean }
+      owns_shop: { Args: { _shop: string }; Returns: boolean }
       redeem_coupon: { Args: { _code: string }; Returns: undefined }
     }
     Enums: {

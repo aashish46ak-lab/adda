@@ -16,6 +16,7 @@ import {
   ShieldCheck,
   MessageSquare,
   Images,
+  Store,
 } from "lucide-react";
 import { useAuth } from "@/hooks/useAuth";
 import { supabase } from "@/integrations/supabase/client";
@@ -24,6 +25,7 @@ const links = [
   { to: "/admin", label: "Dashboard", icon: LayoutDashboard, end: true },
   { to: "/admin/orders", label: "Orders", icon: ShoppingBag, badge: "orders" as const },
   { to: "/admin/messages", label: "Messages", icon: MessageSquare, badge: "messages" as const },
+  { to: "/admin/sellers", label: "Sellers", icon: Store },
   { to: "/admin/products", label: "Products", icon: Package },
   { to: "/admin/categories", label: "Categories", icon: Tags },
   { to: "/admin/gallery", label: "Gallery", icon: Images },

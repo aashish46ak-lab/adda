@@ -8,6 +8,20 @@
       "when": 1791123235763,
       "tag": "0000_marketplace_shops_seed",
       "breakpoints": true
+    },
+    {
+      "idx": 1,
+      "version": "7",
+      "when": 1791294407085,
+      "tag": "0001_seller_commerce",
+      "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "7",
+      "when": 1791294500232,
+      "tag": "0002_guard_seller_item_updates",
+      "breakpoints": true
     }
   ]
 }

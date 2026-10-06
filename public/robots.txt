@@ -6,5 +6,6 @@ Disallow: /checkout
 Disallow: /cart
 Disallow: /my-orders
 Disallow: /auth
+Disallow: /seller$
 
 Sitemap: https://ekharayo.lovable.app/sitemap.xml

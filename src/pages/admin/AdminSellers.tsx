@@ -1,6 +1,7 @@
 import { useCallback, useEffect, useState } from "react";
 import { toast } from "sonner";
 import { Button } from "@/components/ui/button";
+import { useAuth } from "@/hooks/useAuth";
 import { supabase } from "@/integrations/supabase/client";
 import { rs } from "@/lib/media";
 
@@ -8,6 +9,7 @@ interface Shop { id: string; name: string; city: string | null; status: string; 
 interface Item { id: string; shop_id: string | null; product_name: string; line_total: number; commission: number; seller_payout: number; payout_status: string; fulfillment_status: string }
 
 const AdminSellers = () => {
+  const { user } = useAuth();
   const [shops, setShops] = useState<Shop[]>([]);
   const [items, setItems] = useState<Item[]>([]);
   const [filter, setFilter] = useState("all");
@@ -72,6 +74,11 @@ const AdminSellers = () => {
               </div>
               <div className="flex flex-wrap items-center gap-2">
                 {s.status !== "approved" && <Button size="sm" onClick={() => update(s.id, { status: "approved" })}>Approve</Button>}
+                {!s.owner_id && user && (
+                  <Button size="sm" variant="secondary" onClick={() => update(s.id, { owner_id: user.id, status: s.status === "pending" ? "approved" : s.status })}>
+                    Assign to me
+                  </Button>
+                )}
                 {s.status === "pending" && <Button size="sm" variant="outline" onClick={() => update(s.id, { status: "rejected" })}>Reject</Button>}
                 {s.status === "approved" && <Button size="sm" variant="outline" onClick={() => update(s.id, { status: "suspended" })}>Hide shop</Button>}
                 {t.due > 0 && <Button size="sm" variant="secondary" onClick={() => payOut(s.id)}>Mark paid</Button>}

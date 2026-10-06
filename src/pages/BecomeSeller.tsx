@@ -1,12 +1,16 @@
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { Store, CheckCircle2, Loader2 } from "lucide-react";
 import PageShell from "@/components/PageShell";
 import { useLang } from "@/i18n/LanguageContext";
+import { useAuth } from "@/hooks/useAuth";
+import { supabase } from "@/integrations/supabase/client";
 import { toast } from "sonner";
 
 const BecomeSeller = () => {
   const { t } = useLang();
+  const { user } = useAuth();
+  const navigate = useNavigate();
   const [busy, setBusy] = useState(false);
   const [submitted, setSubmitted] = useState(false);
   const [form, setForm] = useState({
@@ -27,10 +31,23 @@ const BecomeSeller = () => {
       toast.error("Please fill required fields");
       return;
     }
+    if (!user) {
+      toast.error("Please sign in to apply");
+      navigate("/auth?redirect=/become-seller");
+      return;
+    }
     setBusy(true);
-    // Placeholder — will wire to Supabase sellers table + admin approval
-    await new Promise((r) => setTimeout(r, 800));
+    const slug = `${form.shopName.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "")}-${Date.now().toString(36).slice(-4)}`;
+    const { error } = await supabase.from("shops").insert({
+      owner_id: user.id,
+      name: form.shopName,
+      slug,
+      city: form.address || null,
+      description: [form.description, `Contact: ${form.fullName}, ${form.phone}${form.email ? ", " + form.email : ""}`, form.category && `Category: ${form.category}`].filter(Boolean).join("\n"),
+      status: "pending",
+    });
     setBusy(false);
+    if (error) return toast.error(error.message.includes("duplicate") ? "You already have a shop application" : error.message);
     setSubmitted(true);
     toast.success("Application received! We'll review and notify you.");
   };

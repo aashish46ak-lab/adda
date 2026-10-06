@@ -29,7 +29,6 @@ import Shop from "./pages/Shop.tsx";
 import SellerDashboard from "./pages/seller/SellerDashboard.tsx";
 import InstallPrompt from "./components/InstallPrompt.tsx";
 import ChatWidget from "./components/ChatWidget.tsx";
-import FloatingLangSwitch from "./components/FloatingLangSwitch.tsx";
 import AuthModal from "./components/AuthModal";
 import WelcomeManager from "./components/WelcomeManager";
 import BottomNav from "./components/BottomNav";
@@ -59,7 +58,6 @@ const App = () => (
             <CartProvider>
               <WelcomeManager />
               <AuthModal />
-              <FloatingLangSwitch />
               <Routes>
                 <Route path="/" element={<Index />} />
                 <Route path="/products" element={<Products />} />

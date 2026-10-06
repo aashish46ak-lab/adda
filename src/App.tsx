@@ -44,6 +44,7 @@ import AdminStaff from "./pages/admin/AdminStaff.tsx";
 import AdminNotifications from "./pages/admin/AdminNotifications.tsx";
 import AdminGallery from "./pages/admin/AdminGallery.tsx";
 import AdminMessages from "./pages/admin/AdminMessages.tsx";
+import AdminSellers from "./pages/admin/AdminSellers.tsx";
 
 const queryClient = new QueryClient();
 
@@ -85,6 +86,7 @@ const App = () => (
                   <Route path="categories" element={<AdminCategories />} />
                   <Route path="orders" element={<AdminOrders />} />
                   <Route path="messages" element={<AdminMessages />} />
+                  <Route path="sellers" element={<AdminSellers />} />
                   <Route path="gallery" element={<AdminGallery />} />
                   <Route path="customers" element={<AdminCustomers />} />
                   <Route path="analytics" element={<AdminAnalytics />} />

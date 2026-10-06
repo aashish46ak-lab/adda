@@ -16,6 +16,7 @@ import home from "@/assets/category-home.jpg";
 import sports from "@/assets/category-sports.jpg";
 import dashainSale from "@/assets/dashain-sale.jpg";
 import FlashSale from "@/components/FlashSale";
+import { usePageTitle } from "@/hooks/usePageTitle";
 
 interface Product {
   id: string;
@@ -37,11 +38,12 @@ const featuredCategories = [
 ];
 const categoryPhoto = (name: string) => {
   const key = name.toLowerCase();
-  if (/electronic|gadget|mobile|computer/.test(key)) return headphones;
-  if (/sport|jersey/.test(key)) return sports;
-  if (/shoe|footwear/.test(key)) return shoes;
-  if (/beauty|care/.test(key)) return beauty;
-  if (/home|kitchen|living/.test(key)) return home;
+  if (/electronic|gadget|mobile|phone|computer|laptop|headphone|audio/.test(key)) return headphones;
+  if (/sport|jersey|fitness|outdoor/.test(key)) return sports;
+  if (/shoe|footwear|sneaker|boot/.test(key)) return shoes;
+  if (/beauty|care|cosmetic|skin|makeup/.test(key)) return beauty;
+  if (/home|kitchen|living|furniture|decor/.test(key)) return home;
+  if (/fashion|cloth|apparel|wear|dress|shirt/.test(key)) return fashion;
   return fashion;
 };
 const ProductTile = ({ product }: { product: Product }) => {
@@ -81,6 +83,7 @@ const Index = () => {
     });
     return () => { mounted = false; };
   }, []);
+  usePageTitle("Home", "Nepal's multi-vendor marketplace. Sabai Seller, Eutai Adda.");
   const deals = products.filter((p) => p.sale_price != null && Number(p.sale_price) < Number(p.price));
   const categoryList = categories.length ? categories.map((c) => ({ ...c, image: c.image_url || categoryPhoto(c.name) })) : featuredCategories;
   return (
@@ -98,10 +101,10 @@ const Index = () => {
         <section className="relative isolate min-h-[300px] overflow-hidden bg-secondary sm:min-h-[390px] lg:min-h-[450px]">
           <img src={heroImage} alt="Fashion, footwear, electronics and everyday products" width={1600} height={900} className="absolute inset-0 -z-10 h-full w-full object-cover object-[65%_center] sm:object-center" />
           <div className="container mx-auto flex min-h-[300px] items-center px-5 py-8 sm:min-h-[390px] sm:px-8 lg:min-h-[450px] lg:px-12">
-            <div className="max-w-[290px] sm:max-w-[400px]">
+            <div className="max-w-[min(100%,320px)] rounded-xl bg-background/80 p-4 backdrop-blur-sm sm:max-w-[420px] sm:bg-transparent sm:p-0 sm:backdrop-blur-none">
               <p className="mb-3 text-[11px] font-bold uppercase text-primary sm:text-xs">Sabai Seller, Eutai Adda</p>
               <h1 className="font-display text-3xl font-extrabold leading-[1.1] text-foreground sm:text-5xl lg:text-6xl">Find your next<br /><span className="text-primary">favourite thing.</span></h1>
-              <p className="mt-4 max-w-sm text-xs leading-relaxed text-foreground/80 sm:text-base">Discover what’s new from shops across Nepal, all in one place.</p>
+              <p className="mt-4 max-w-sm text-xs leading-relaxed text-foreground/80 sm:text-base">Discover what's new from shops across Nepal, all in one place.</p>
               <Link to="/products" className="mt-6 inline-flex items-center gap-2 rounded-md bg-accent px-5 py-3 text-sm font-bold text-accent-foreground transition-colors hover:bg-accent/90">Explore products <ArrowRight size={16} /></Link>
             </div>
           </div>
@@ -115,13 +118,15 @@ const Index = () => {
           </div>
         </div>
         <div className="container mx-auto space-y-10 px-4 py-8 sm:px-6 sm:py-10">
-          <Link to="/products" aria-label="Dashain Mega Sale — shop now" className="group relative block overflow-hidden rounded-md">
-            <img src={dashainSale} alt="Dashain festival with kites, marigolds and gifts" width={1600} height={640} loading="lazy" className="h-40 w-full object-cover object-right sm:h-56 lg:h-64" />
-            <div className="absolute inset-0 bg-gradient-to-r from-background/90 via-background/50 to-transparent" />
-            <div className="absolute inset-y-0 left-0 flex flex-col justify-center p-5 sm:p-10">
+          <Link to="/products" aria-label="Dashain Mega Sale — shop now" className="group block overflow-hidden rounded-xl border border-border bg-card sm:relative">
+            <div className="relative h-36 w-full sm:h-56 lg:h-64">
+              <img src={dashainSale} alt="Dashain festival with kites, marigolds and gifts" width={1600} height={640} loading="lazy" className="h-full w-full object-cover object-center sm:object-right" />
+              <div className="absolute inset-0 bg-gradient-to-t from-background/95 via-background/40 to-transparent sm:bg-gradient-to-r sm:from-background/90 sm:via-background/45 sm:to-transparent" />
+            </div>
+            <div className="relative -mt-16 px-4 pb-4 sm:absolute sm:inset-y-0 sm:left-0 sm:mt-0 sm:flex sm:max-w-[55%] sm:flex-col sm:justify-center sm:p-8 lg:p-10">
               <p className="text-[11px] font-bold uppercase text-accent sm:text-xs">Festival offer</p>
-              <h2 className="font-display text-2xl font-extrabold text-foreground sm:text-4xl">Dashain Mega Sale</h2>
-              <p className="mt-1 text-xs text-foreground/80 sm:text-base">Up to 40% off fashion, gadgets & home</p>
+              <h2 className="font-display text-xl font-extrabold text-foreground sm:text-3xl lg:text-4xl">Dashain Mega Sale</h2>
+              <p className="mt-1 text-xs text-foreground/80 sm:text-sm lg:text-base">Up to 40% off fashion, gadgets & home</p>
               <span className="mt-3 inline-flex w-fit items-center gap-1 rounded-md bg-accent px-4 py-2 text-xs font-bold text-accent-foreground sm:text-sm">Shop the sale <ArrowRight size={14} /></span>
             </div>
           </Link>
@@ -132,12 +137,12 @@ const Index = () => {
               {categoryList.slice(0, 6).map((cat) => <Link key={cat.slug} to={`/products?cat=${encodeURIComponent(cat.slug)}`} className="group min-w-0 overflow-hidden rounded-md border border-border bg-card hover:border-accent/50"><div className="aspect-[4/3] overflow-hidden bg-muted"><img src={cat.image} alt="" loading="lazy" className="h-full w-full object-cover transition-transform duration-300 group-hover:scale-105" /></div><p className="truncate px-2 py-2.5 text-center text-[11px] font-semibold sm:text-sm">{cat.name}</p></Link>)}
             </div>
           </section>
-          {deals.length > 0 && <section aria-labelledby="deals-title"><div className="mb-4 flex items-end justify-between"><div><p className="text-[11px] font-bold uppercase text-accent">Worth a look</p><h2 id="deals-title" className="font-display text-xl font-bold sm:text-2xl">Current deals</h2></div><Link to="/products" className="inline-flex items-center gap-1 text-xs font-semibold text-primary">Shop all <ChevronRight size={16} /></Link></div><div className="grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-5">{deals.slice(0, 5).map((p) => <ProductTile key={p.id} product={p} />)}</div></section>}
+          {deals.length > 0 && <section aria-labelledby="deals-title"><div className="mb-4 flex items-end justify-between"><div><p className="text-[11px] font-bold uppercase text-accent">Worth a look</p><h2 id="deals-title" className="font-display text-xl font-bold sm:text-2xl">Current deals</h2></div><Link to="/products" className="inline-flex items-center gap-1 text-xs font-semibold text-primary">Shop all <ChevronRight size={16} /></Link></div><div className="grid grid-cols-2 gap-3 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6">{deals.slice(0, 5).map((p) => <ProductTile key={p.id} product={p} />)}</div></section>}
           <section aria-labelledby="products-title"><div className="mb-4 flex items-end justify-between"><div><p className="text-[11px] font-bold uppercase text-accent">The selection</p><h2 id="products-title" className="font-display text-xl font-bold sm:text-2xl">Latest products</h2></div><Link to="/products" className="inline-flex items-center gap-1 text-xs font-semibold text-primary">See all <ChevronRight size={16} /></Link></div>
-            {loading ? <div className="grid grid-cols-2 gap-3 sm:grid-cols-4 lg:grid-cols-5">{Array.from({ length: 5 }, (_, i) => <div key={i} className="aspect-[3/4] animate-pulse rounded-md bg-muted" />)}</div> : products.length ? <div className="grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-5">{products.slice(0, 10).map((p) => <ProductTile key={p.id} product={p} />)}</div> : <div className="border-y border-border py-10 text-center"><Package size={24} className="mx-auto mb-2 text-muted-foreground" /><p className="text-sm text-muted-foreground">Products are coming soon.</p></div>}
+            {loading ? <div className="grid grid-cols-2 gap-3 sm:grid-cols-4 lg:grid-cols-5">{Array.from({ length: 5 }, (_, i) => <div key={i} className="aspect-[3/4] animate-pulse rounded-md bg-muted" />)}</div> : products.length ? <div className="grid grid-cols-2 gap-3 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6">{products.slice(0, 10).map((p) => <ProductTile key={p.id} product={p} />)}</div> : <div className="border-y border-border py-10 text-center"><Package size={24} className="mx-auto mb-2 text-muted-foreground" /><p className="text-sm text-muted-foreground">Products are coming soon.</p></div>}
           </section>
         </div>
-        <section className="border-y border-border bg-secondary"><div className="container mx-auto grid gap-5 px-4 py-9 sm:grid-cols-3 sm:px-6"><div className="flex items-center gap-3"><Store className="shrink-0 text-accent" size={24} /><div><strong className="text-sm">Discover shops</strong><p className="text-xs text-muted-foreground">Find stores across Nepal</p></div></div><div className="flex items-center gap-3"><Truck className="shrink-0 text-accent" size={24} /><div><strong className="text-sm">Shop with ease</strong><p className="text-xs text-muted-foreground">Keep your orders in one place</p></div></div><div className="flex items-center gap-3"><Headphones className="shrink-0 text-accent" size={24} /><div><strong className="text-sm">Need help?</strong><p className="text-xs text-muted-foreground">We’re here for your questions</p></div></div></div></section>
+        <section className="border-y border-border bg-secondary"><div className="container mx-auto grid gap-5 px-4 py-9 sm:grid-cols-3 sm:px-6"><div className="flex items-center gap-3"><Store className="shrink-0 text-accent" size={24} /><div><strong className="text-sm">Discover shops</strong><p className="text-xs text-muted-foreground">Find stores across Nepal</p></div></div><div className="flex items-center gap-3"><Truck className="shrink-0 text-accent" size={24} /><div><strong className="text-sm">Shop with ease</strong><p className="text-xs text-muted-foreground">Keep your orders in one place</p></div></div><div className="flex items-center gap-3"><Headphones className="shrink-0 text-accent" size={24} /><div><strong className="text-sm">Need help?</strong><p className="text-xs text-muted-foreground">We're here for your questions</p></div></div></div></section>
         <section className="container mx-auto flex flex-col gap-5 px-4 py-10 sm:flex-row sm:items-center sm:justify-between sm:px-6"><div><p className="text-[11px] font-bold uppercase text-accent">Your shop belongs here</p><h2 className="mt-1 font-display text-2xl font-bold">Grow with ADDA</h2><p className="mt-1 text-sm text-muted-foreground">Bring your products to customers across Nepal.</p></div><Link to="/become-seller" className="inline-flex w-fit items-center gap-2 rounded-md bg-primary px-5 py-3 text-sm font-semibold text-primary-foreground">Become a seller <ArrowRight size={16} /></Link></section>
       </main>
       <SiteFooter />

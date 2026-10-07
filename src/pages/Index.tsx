@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import { ArrowRight, BadgeCheck, ChevronRight, Headphones, Package, ShieldCheck, Store, Truck } from "lucide-react";
+import { ArrowRight, BadgeCheck, ChevronRight, Headphones, Mail, MapPin, Package, Quote, ShieldCheck, Star, Store, Truck, Zap } from "lucide-react";
 import Navbar from "@/components/Navbar";
 import SiteFooter from "@/components/SiteFooter";
 import SmartSearchBar from "@/components/SmartSearchBar";

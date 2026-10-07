@@ -103,7 +103,7 @@ const Index = () => {
         <section className="relative isolate overflow-hidden bg-secondary sm:min-h-[390px] lg:min-h-[450px] 2xl:min-h-[520px]">
           <img src={heroImage} alt="Fashion, footwear, electronics and everyday products" width={1600} height={900} className="block aspect-[16/9] w-full object-cover sm:absolute sm:inset-0 sm:-z-10 sm:aspect-auto sm:h-full" />
           <div className="container mx-auto flex items-center px-5 py-6 sm:min-h-[390px] sm:px-8 sm:py-8 lg:min-h-[450px] lg:px-12 2xl:min-h-[520px]">
-            <div className="w-full sm:max-w-[420px] lg:max-w-[480px]">
+            <div className="w-full sm:max-w-[360px] lg:max-w-[480px]">
               <p className="mb-3 text-[11px] font-bold uppercase text-primary sm:text-xs">Sabai Seller, Eutai Adda</p>
               <h1 className="font-display text-3xl font-extrabold leading-[1.1] text-foreground sm:text-5xl lg:text-6xl">Find your next<br /><span className="text-primary">favourite thing.</span></h1>
               <p className="mt-4 max-w-sm text-xs leading-relaxed text-foreground/80 sm:text-base">Discover what's new from shops across Nepal, all in one place.</p>
@@ -123,9 +123,9 @@ const Index = () => {
           <Link to="/products" aria-label="Dashain Mega Sale — shop now" className="group block overflow-hidden rounded-xl border border-border bg-card sm:relative">
             <div className="relative h-36 w-full sm:h-56 lg:h-64">
               <img src={dashainSale} alt="Dashain festival with kites, marigolds and gifts" width={1600} height={640} loading="lazy" className="h-full w-full object-cover object-center sm:object-right" />
-              <div className="absolute inset-0 bg-gradient-to-t from-background/95 via-background/40 to-transparent sm:bg-gradient-to-r sm:from-background/90 sm:via-background/45 sm:to-transparent" />
+              <div className="absolute inset-0 hidden sm:block sm:bg-gradient-to-r sm:from-background/90 sm:via-background/45 sm:to-transparent" />
             </div>
-            <div className="relative -mt-16 px-4 pb-4 sm:absolute sm:inset-y-0 sm:left-0 sm:mt-0 sm:flex sm:max-w-[55%] sm:flex-col sm:justify-center sm:p-8 lg:p-10">
+            <div className="relative px-4 py-4 sm:absolute sm:inset-y-0 sm:left-0 sm:mt-0 sm:flex sm:max-w-[55%] sm:flex-col sm:justify-center sm:p-8 lg:p-10">
               <p className="text-[11px] font-bold uppercase text-accent sm:text-xs">Festival offer</p>
               <h2 className="font-display text-xl font-extrabold text-foreground sm:text-3xl lg:text-4xl">Dashain Mega Sale</h2>
               <p className="mt-1 text-xs text-foreground/80 sm:text-sm lg:text-base">Up to 40% off fashion, gadgets & home</p>

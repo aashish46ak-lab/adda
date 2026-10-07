@@ -14,6 +14,7 @@ import shoes from "@/assets/category-shoes.jpg";
 import beauty from "@/assets/category-beauty.jpg";
 import home from "@/assets/category-home.jpg";
 import sports from "@/assets/category-sports.jpg";
+import phone from "@/assets/category-phone.jpg";
 import dashainSale from "@/assets/dashain-sale.jpg";
 import FlashSale from "@/components/FlashSale";
 import { usePageTitle } from "@/hooks/usePageTitle";
@@ -38,13 +39,14 @@ const featuredCategories = [
 ];
 const categoryPhoto = (name: string) => {
   const key = name.toLowerCase();
-  if (/electronic|gadget|mobile|phone|computer|laptop|headphone|audio/.test(key)) return headphones;
+  if (/mobile|phone|tablet/.test(key)) return phone;
+  if (/electronic|gadget|computer|laptop|headphone|audio|accessor/.test(key)) return headphones;
   if (/sport|jersey|fitness|outdoor/.test(key)) return sports;
   if (/shoe|footwear|sneaker|boot/.test(key)) return shoes;
   if (/beauty|care|cosmetic|skin|makeup/.test(key)) return beauty;
-  if (/home|kitchen|living|furniture|decor/.test(key)) return home;
-  if (/fashion|cloth|apparel|wear|dress|shirt/.test(key)) return fashion;
-  return fashion;
+  if (/home|kitchen|living|furniture|decor|grocery/.test(key)) return home;
+  if (/fashion|cloth|apparel|wear|dress|shirt|kid/.test(key)) return fashion;
+  return headphones;
 };
 const ProductTile = ({ product }: { product: Product }) => {
   const price = Number(product.sale_price ?? product.price);
@@ -98,10 +100,10 @@ const Index = () => {
             <span className="hidden items-center gap-1 sm:inline-flex"><BadgeCheck size={14} /> Discover local shops</span>
           </div>
         </div>
-        <section className="relative isolate min-h-[300px] overflow-hidden bg-secondary sm:min-h-[390px] lg:min-h-[450px]">
-          <img src={heroImage} alt="Fashion, footwear, electronics and everyday products" width={1600} height={900} className="absolute inset-0 -z-10 h-full w-full object-cover object-[65%_center] sm:object-center" />
-          <div className="container mx-auto flex min-h-[300px] items-center px-5 py-8 sm:min-h-[390px] sm:px-8 lg:min-h-[450px] lg:px-12">
-            <div className="max-w-[min(100%,320px)] rounded-xl bg-background/80 p-4 backdrop-blur-sm sm:max-w-[420px] sm:bg-transparent sm:p-0 sm:backdrop-blur-none">
+        <section className="relative isolate overflow-hidden bg-secondary sm:min-h-[390px] lg:min-h-[450px] 2xl:min-h-[520px]">
+          <img src={heroImage} alt="Fashion, footwear, electronics and everyday products" width={1600} height={900} className="block aspect-[16/9] w-full object-cover sm:absolute sm:inset-0 sm:-z-10 sm:aspect-auto sm:h-full" />
+          <div className="container mx-auto flex items-center px-5 py-6 sm:min-h-[390px] sm:px-8 sm:py-8 lg:min-h-[450px] lg:px-12 2xl:min-h-[520px]">
+            <div className="w-full sm:max-w-[360px] lg:max-w-[480px]">
               <p className="mb-3 text-[11px] font-bold uppercase text-primary sm:text-xs">Sabai Seller, Eutai Adda</p>
               <h1 className="font-display text-3xl font-extrabold leading-[1.1] text-foreground sm:text-5xl lg:text-6xl">Find your next<br /><span className="text-primary">favourite thing.</span></h1>
               <p className="mt-4 max-w-sm text-xs leading-relaxed text-foreground/80 sm:text-base">Discover what's new from shops across Nepal, all in one place.</p>
@@ -121,9 +123,9 @@ const Index = () => {
           <Link to="/products" aria-label="Dashain Mega Sale — shop now" className="group block overflow-hidden rounded-xl border border-border bg-card sm:relative">
             <div className="relative h-36 w-full sm:h-56 lg:h-64">
               <img src={dashainSale} alt="Dashain festival with kites, marigolds and gifts" width={1600} height={640} loading="lazy" className="h-full w-full object-cover object-center sm:object-right" />
-              <div className="absolute inset-0 bg-gradient-to-t from-background/95 via-background/40 to-transparent sm:bg-gradient-to-r sm:from-background/90 sm:via-background/45 sm:to-transparent" />
+              <div className="absolute inset-0 hidden sm:block sm:bg-gradient-to-r sm:from-background/90 sm:via-background/45 sm:to-transparent" />
             </div>
-            <div className="relative -mt-16 px-4 pb-4 sm:absolute sm:inset-y-0 sm:left-0 sm:mt-0 sm:flex sm:max-w-[55%] sm:flex-col sm:justify-center sm:p-8 lg:p-10">
+            <div className="relative px-4 py-4 sm:absolute sm:inset-y-0 sm:left-0 sm:mt-0 sm:flex sm:max-w-[55%] sm:flex-col sm:justify-center sm:p-8 lg:p-10">
               <p className="text-[11px] font-bold uppercase text-accent sm:text-xs">Festival offer</p>
               <h2 className="font-display text-xl font-extrabold text-foreground sm:text-3xl lg:text-4xl">Dashain Mega Sale</h2>
               <p className="mt-1 text-xs text-foreground/80 sm:text-sm lg:text-base">Up to 40% off fashion, gadgets & home</p>

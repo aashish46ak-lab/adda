@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import { ArrowRight, BadgeCheck, ChevronRight, Headphones, Package, ShieldCheck, Store, Truck } from "lucide-react";
+import { ArrowRight, BadgeCheck, ChevronRight, Headphones, Mail, MapPin, Package, Quote, ShieldCheck, Star, Store, Truck, Zap } from "lucide-react";
 import Navbar from "@/components/Navbar";
 import SiteFooter from "@/components/SiteFooter";
 import SmartSearchBar from "@/components/SmartSearchBar";
@@ -29,6 +29,12 @@ interface Product {
   stock: number;
 }
 interface Category { id: string; name: string; slug: string; image_url: string | null }
+interface Shop { id: string; name: string; slug: string; city: string | null; rating: number | null }
+const testimonials = [
+  { name: "Sita Sharma", place: "Kathmandu", text: "Ordered a phone during the Dashain sale and it arrived in two days. Prices were better than the local shops." },
+  { name: "Bikash Gurung", place: "Pokhara", text: "I sell my handmade bags on ADDA now. The seller dashboard is simple and orders come in every week." },
+  { name: "Anita Thapa", place: "Lalitpur", text: "Cash on delivery makes it easy to trust. My grocery order was packed well and delivered on time." },
+];
 const featuredCategories = [
   { name: "Fashion", slug: "fashion", image: fashion },
   { name: "Electronics", slug: "electronics", image: headphones },
@@ -71,22 +77,26 @@ const ProductTile = ({ product }: { product: Product }) => {
 const Index = () => {
   const [products, setProducts] = useState<Product[]>([]);
   const [categories, setCategories] = useState<Category[]>([]);
+  const [shops, setShops] = useState<Shop[]>([]);
   const [loading, setLoading] = useState(true);
   useEffect(() => {
     let mounted = true;
     Promise.all([
       supabase.from("products").select("id,name,price,sale_price,images,featured,stock").eq("is_active", true).order("created_at", { ascending: false }).limit(24),
       supabase.from("categories").select("id,name,slug,image_url").order("sort_order").limit(12),
-    ]).then(([p, c]) => {
+      supabase.from("shops").select("id,name,slug,city,rating").eq("status", "approved").order("rating", { ascending: false }).limit(8),
+    ]).then(([p, c, s]) => {
       if (!mounted) return;
       setProducts((p.data as Product[]) ?? []);
       setCategories((c.data as Category[]) ?? []);
+      setShops((s.data as Shop[]) ?? []);
       setLoading(false);
     });
     return () => { mounted = false; };
   }, []);
   usePageTitle("Home", "Nepal's multi-vendor marketplace. Sabai Seller, Eutai Adda.");
   const deals = products.filter((p) => p.sale_price != null && Number(p.sale_price) < Number(p.price));
+  const featured = products.filter((p) => p.featured);
   const categoryList = categories.length ? categories.map((c) => ({ ...c, image: c.image_url || categoryPhoto(c.name) })) : featuredCategories;
   return (
     <div className="min-h-screen bg-background pt-14 pb-16 md:pb-0">
@@ -142,6 +152,61 @@ const Index = () => {
           {deals.length > 0 && <section aria-labelledby="deals-title"><div className="mb-4 flex items-end justify-between"><div><p className="text-[11px] font-bold uppercase text-accent">Worth a look</p><h2 id="deals-title" className="font-display text-xl font-bold sm:text-2xl">Current deals</h2></div><Link to="/products" className="inline-flex items-center gap-1 text-xs font-semibold text-primary">Shop all <ChevronRight size={16} /></Link></div><div className="grid grid-cols-2 gap-3 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6">{deals.slice(0, 5).map((p) => <ProductTile key={p.id} product={p} />)}</div></section>}
           <section aria-labelledby="products-title"><div className="mb-4 flex items-end justify-between"><div><p className="text-[11px] font-bold uppercase text-accent">The selection</p><h2 id="products-title" className="font-display text-xl font-bold sm:text-2xl">Latest products</h2></div><Link to="/products" className="inline-flex items-center gap-1 text-xs font-semibold text-primary">See all <ChevronRight size={16} /></Link></div>
             {loading ? <div className="grid grid-cols-2 gap-3 sm:grid-cols-4 lg:grid-cols-5">{Array.from({ length: 5 }, (_, i) => <div key={i} className="aspect-[3/4] animate-pulse rounded-md bg-muted" />)}</div> : products.length ? <div className="grid grid-cols-2 gap-3 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6">{products.slice(0, 10).map((p) => <ProductTile key={p.id} product={p} />)}</div> : <div className="border-y border-border py-10 text-center"><Package size={24} className="mx-auto mb-2 text-muted-foreground" /><p className="text-sm text-muted-foreground">Products are coming soon.</p></div>}
+          </section>
+          {featured.length > 0 && (
+            <section aria-labelledby="featured-title">
+              <div className="mb-4 flex items-end justify-between"><div><p className="text-[11px] font-bold uppercase text-accent">Handpicked</p><h2 id="featured-title" className="font-display text-xl font-bold sm:text-2xl">Featured products</h2></div><Link to="/products" className="inline-flex items-center gap-1 text-xs font-semibold text-primary">See all <ChevronRight size={16} /></Link></div>
+              <div className="grid grid-cols-2 gap-3 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6">{featured.slice(0, 6).map((p) => <ProductTile key={p.id} product={p} />)}</div>
+            </section>
+          )}
+          {shops.length > 0 && (
+            <section aria-labelledby="shops-title">
+              <div className="mb-4 flex items-end justify-between"><div><p className="text-[11px] font-bold uppercase text-accent">Local sellers</p><h2 id="shops-title" className="font-display text-xl font-bold sm:text-2xl">Featured shops</h2></div><Link to="/sellers" className="inline-flex items-center gap-1 text-xs font-semibold text-primary">All shops <ChevronRight size={16} /></Link></div>
+              <div className="grid grid-cols-2 gap-3 sm:grid-cols-4">
+                {shops.slice(0, 8).map((s) => (
+                  <Link key={s.id} to={`/shops/${s.slug}`} className="group rounded-md border border-border bg-card p-4 transition-colors hover:border-accent/50">
+                    <div className="mb-3 flex h-11 w-11 items-center justify-center rounded-full bg-primary/10 text-primary"><Store size={20} /></div>
+                    <h3 className="truncate text-sm font-bold group-hover:text-primary">{s.name}</h3>
+                    <p className="mt-0.5 flex items-center gap-1 text-[11px] text-muted-foreground"><MapPin size={11} /> {s.city || "Nepal"}</p>
+                    {s.rating != null && <p className="mt-1 flex items-center gap-1 text-[11px] font-semibold text-accent"><Star size={11} className="fill-accent" /> {Number(s.rating).toFixed(1)}</p>}
+                  </Link>
+                ))}
+              </div>
+            </section>
+          )}
+          <section aria-labelledby="why-title" className="grid grid-cols-2 gap-3 rounded-xl border border-border bg-card p-5 sm:grid-cols-4 sm:p-8">
+            <div className="text-center"><p className="font-display text-2xl font-extrabold text-primary sm:text-3xl">{products.length}+</p><p className="mt-1 text-[11px] font-semibold text-muted-foreground sm:text-xs">Products listed</p></div>
+            <div className="text-center"><p className="font-display text-2xl font-extrabold text-primary sm:text-3xl">{shops.length}+</p><p className="mt-1 text-[11px] font-semibold text-muted-foreground sm:text-xs">Local shops</p></div>
+            <div className="text-center"><p className="font-display text-2xl font-extrabold text-primary sm:text-3xl">77</p><p className="mt-1 text-[11px] font-semibold text-muted-foreground sm:text-xs">Districts reached</p></div>
+            <div className="text-center"><p className="font-display text-2xl font-extrabold text-primary sm:text-3xl">COD</p><p className="mt-1 text-[11px] font-semibold text-muted-foreground sm:text-xs">Pay on delivery</p></div>
+          </section>
+          <section aria-labelledby="reviews-title">
+            <div className="mb-4"><p className="text-[11px] font-bold uppercase text-accent">From our community</p><h2 id="reviews-title" className="font-display text-xl font-bold sm:text-2xl">What people say</h2></div>
+            <div className="grid gap-3 sm:grid-cols-3">
+              {testimonials.map((t) => (
+                <figure key={t.name} className="rounded-md border border-border bg-card p-5">
+                  <Quote size={18} className="mb-3 text-accent" />
+                  <blockquote className="text-xs leading-relaxed text-foreground/85 sm:text-sm">{t.text}</blockquote>
+                  <figcaption className="mt-4 flex items-center gap-2">
+                    <span className="flex h-8 w-8 items-center justify-center rounded-full bg-primary/10 text-xs font-bold text-primary">{t.name[0]}</span>
+                    <span><strong className="block text-xs">{t.name}</strong><span className="text-[11px] text-muted-foreground">{t.place}</span></span>
+                  </figcaption>
+                </figure>
+              ))}
+            </div>
+          </section>
+          <section aria-labelledby="newsletter-title" className="overflow-hidden rounded-xl bg-primary p-6 text-primary-foreground sm:p-10">
+            <div className="flex flex-col gap-5 sm:flex-row sm:items-center sm:justify-between">
+              <div className="max-w-md">
+                <p className="flex items-center gap-1.5 text-[11px] font-bold uppercase opacity-80"><Zap size={12} /> Never miss a deal</p>
+                <h2 id="newsletter-title" className="mt-1 font-display text-xl font-bold sm:text-2xl">Get sale alerts in your inbox</h2>
+                <p className="mt-1 text-xs opacity-80 sm:text-sm">Flash sales, festival offers and new shops — straight to you.</p>
+              </div>
+              <form className="flex w-full max-w-sm gap-2" onSubmit={(e) => { e.preventDefault(); const f = e.currentTarget; f.reset(); }}>
+                <input type="email" required placeholder="Your email address" className="min-w-0 flex-1 rounded-md border border-primary-foreground/30 bg-primary-foreground/10 px-3 py-2.5 text-sm placeholder:text-primary-foreground/60 focus:outline-none focus:ring-2 focus:ring-accent" />
+                <button type="submit" className="inline-flex shrink-0 items-center gap-1.5 rounded-md bg-accent px-4 py-2.5 text-xs font-bold text-accent-foreground sm:text-sm"><Mail size={14} /> Subscribe</button>
+              </form>
+            </div>
           </section>
         </div>
         <section className="border-y border-border bg-secondary"><div className="container mx-auto grid gap-5 px-4 py-9 sm:grid-cols-3 sm:px-6"><div className="flex items-center gap-3"><Store className="shrink-0 text-accent" size={24} /><div><strong className="text-sm">Discover shops</strong><p className="text-xs text-muted-foreground">Find stores across Nepal</p></div></div><div className="flex items-center gap-3"><Truck className="shrink-0 text-accent" size={24} /><div><strong className="text-sm">Shop with ease</strong><p className="text-xs text-muted-foreground">Keep your orders in one place</p></div></div><div className="flex items-center gap-3"><Headphones className="shrink-0 text-accent" size={24} /><div><strong className="text-sm">Need help?</strong><p className="text-xs text-muted-foreground">We're here for your questions</p></div></div></div></section>

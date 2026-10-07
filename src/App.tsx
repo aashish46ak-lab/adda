@@ -32,6 +32,7 @@ import ChatWidget from "./components/ChatWidget.tsx";
 import AuthModal from "./components/AuthModal";
 import WelcomeManager from "./components/WelcomeManager";
 import BottomNav from "./components/BottomNav";
+import RouteTitle from "./components/RouteTitle";
 import AdminLayout from "./components/admin/AdminLayout.tsx";
 import Dashboard from "./pages/admin/Dashboard.tsx";
 import AdminProducts from "./pages/admin/AdminProducts.tsx";
@@ -58,6 +59,7 @@ const App = () => (
           <AuthProvider>
             <CartProvider>
               <WelcomeManager />
+              <RouteTitle />
               <AuthModal />
               <Routes>
                 <Route path="/" element={<Index />} />

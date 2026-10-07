@@ -96,6 +96,7 @@ const Index = () => {
   }, []);
   usePageTitle("Home", "Nepal's multi-vendor marketplace. Sabai Seller, Eutai Adda.");
   const deals = products.filter((p) => p.sale_price != null && Number(p.sale_price) < Number(p.price));
+  const featured = products.filter((p) => p.featured);
   const categoryList = categories.length ? categories.map((c) => ({ ...c, image: c.image_url || categoryPhoto(c.name) })) : featuredCategories;
   return (
     <div className="min-h-screen bg-background pt-14 pb-16 md:pb-0">

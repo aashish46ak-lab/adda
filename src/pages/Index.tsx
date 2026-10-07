@@ -77,16 +77,19 @@ const ProductTile = ({ product }: { product: Product }) => {
 const Index = () => {
   const [products, setProducts] = useState<Product[]>([]);
   const [categories, setCategories] = useState<Category[]>([]);
+  const [shops, setShops] = useState<Shop[]>([]);
   const [loading, setLoading] = useState(true);
   useEffect(() => {
     let mounted = true;
     Promise.all([
       supabase.from("products").select("id,name,price,sale_price,images,featured,stock").eq("is_active", true).order("created_at", { ascending: false }).limit(24),
       supabase.from("categories").select("id,name,slug,image_url").order("sort_order").limit(12),
-    ]).then(([p, c]) => {
+      supabase.from("shops").select("id,name,slug,city,rating").eq("status", "approved").order("rating", { ascending: false }).limit(8),
+    ]).then(([p, c, s]) => {
       if (!mounted) return;
       setProducts((p.data as Product[]) ?? []);
       setCategories((c.data as Category[]) ?? []);
+      setShops((s.data as Shop[]) ?? []);
       setLoading(false);
     });
     return () => { mounted = false; };

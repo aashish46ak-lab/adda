@@ -29,6 +29,12 @@ interface Product {
   stock: number;
 }
 interface Category { id: string; name: string; slug: string; image_url: string | null }
+interface Shop { id: string; name: string; slug: string; city: string | null; rating: number | null }
+const testimonials = [
+  { name: "Sita Sharma", place: "Kathmandu", text: "Ordered a phone during the Dashain sale and it arrived in two days. Prices were better than the local shops." },
+  { name: "Bikash Gurung", place: "Pokhara", text: "I sell my handmade bags on ADDA now. The seller dashboard is simple and orders come in every week." },
+  { name: "Anita Thapa", place: "Lalitpur", text: "Cash on delivery makes it easy to trust. My grocery order was packed well and delivered on time." },
+];
 const featuredCategories = [
   { name: "Fashion", slug: "fashion", image: fashion },
   { name: "Electronics", slug: "electronics", image: headphones },
